@@ -63,25 +63,6 @@ var requestHandler = function(request, response) {
   
   }
   
-  /*
-  response: function() {
-    this._ended = false;
-    this._responseCode = null;
-    this._headers = null;
-    this._data = null;
-
-    this.writeHead = function(responseCode, headers) {
-      this._responseCode = responseCode;
-      this._headers = headers;
-    }.bind(this);
-
-    this.end = function(data) {
-      this._ended = true;
-      this._data = data;
-    }.bind(this);
-  }
-  */
-  
   if (request.method === 'POST' && request.url === '/classes/messages') {
     statusCode = 201;
     
@@ -91,7 +72,6 @@ var requestHandler = function(request, response) {
     }).on('end', () => {
       body = Buffer.concat(body).toString();
       serverData.push(JSON.parse(body));
-      //console.log('server', serverData);
     });
     
   } else if (request.url !== '/classes/messages') {

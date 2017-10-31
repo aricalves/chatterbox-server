@@ -91,7 +91,7 @@ describe('Node Server Request Listener Function', function() {
     res = new stubs.response();
 
     handler.requestHandler(req, res);
-    console.log('results data:', res._data)
+
 
     expect(res._responseCode).to.equal(200);
     
