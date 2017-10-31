@@ -103,6 +103,16 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
+  it('Should respond to an OPTIONS request with a status of 202', function() {
+    var req = new stubs.request('/classes/messages', 'OPTIONS');
+    var res = new stubs.response();
+    
+    waitForThen(
+      function() { return res._ended; },
+      function() {
+        expect(res._responseCode).to.equal(202);
+      });
+  });
 
   it('Should 404 when asked for a nonexistent file', function() {
     var req = new stubs.request('/arglebargle', 'GET');
@@ -117,5 +127,8 @@ describe('Node Server Request Listener Function', function() {
         expect(res._responseCode).to.equal(404);
       });
   });
+  
+  
+  
 
 });

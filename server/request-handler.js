@@ -63,6 +63,10 @@ var requestHandler = function(request, response) {
   
   }
   
+  if (request.method === 'OPTIONS') {
+    statusCode = 202;
+  }
+  
   if (request.method === 'POST' && request.url === '/classes/messages') {
     statusCode = 201;
     
