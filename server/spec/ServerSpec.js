@@ -56,7 +56,7 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
-  it('Should accept posts to /classes/room', function() {
+  it('Should accept posts to /classes/messages', function() {
     var stubMsg = {
       username: 'Jono',
       message: 'Do my bidding!'
@@ -70,8 +70,7 @@ describe('Node Server Request Listener Function', function() {
     expect(res._responseCode).to.equal(201);
 
     // Testing for a newline isn't a valid test
-    // TODO: Replace with with a valid test
-    // expect(res._data).to.equal(JSON.stringify('\n'));
+
     expect(res._ended).to.equal(true);
   });
 
@@ -87,13 +86,16 @@ describe('Node Server Request Listener Function', function() {
 
     expect(res._responseCode).to.equal(201);
 
-      // Now if we request the log for that room the message we posted should be there:
+    // Now if we request the log for that room the message we posted should be there:
     req = new stubs.request('/classes/messages', 'GET');
     res = new stubs.response();
 
     handler.requestHandler(req, res);
+    console.log('results data:', res._data)
 
     expect(res._responseCode).to.equal(200);
+    
+    
     var messages = JSON.parse(res._data).results;
     expect(messages.length).to.be.above(0);
     expect(messages[0].username).to.equal('Jono');
